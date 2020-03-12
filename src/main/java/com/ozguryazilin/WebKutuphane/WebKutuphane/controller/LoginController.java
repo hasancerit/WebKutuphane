@@ -8,6 +8,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class LoginController {
     @GetMapping("/login")
     public String login(Model model) {
+        System.out.println("LOGIN METHOD");
         return "login/login";
+    }
+
+    @GetMapping("/test")
+    public String test() {
+        return "login/test";
     }
 }

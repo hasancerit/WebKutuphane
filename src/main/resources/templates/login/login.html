@@ -32,7 +32,7 @@
     <div class="container" style="margin-top: 20px" >
         <div class="row justify-content-center">
             <div class="col-md-9">
-                <form th:object="${user}" th:action="@{/user/handlelogin}" method="post">
+                <form method="post">
                     <div th:if="${param.error}">
                         Invalid username and password.
                     </div>
