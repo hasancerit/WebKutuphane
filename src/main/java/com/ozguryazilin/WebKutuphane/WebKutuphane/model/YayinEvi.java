@@ -10,7 +10,7 @@ import java.util.Set;
 @Setter
 @Getter
 @Entity
-public class YayınEvi {
+public class YayinEvi {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

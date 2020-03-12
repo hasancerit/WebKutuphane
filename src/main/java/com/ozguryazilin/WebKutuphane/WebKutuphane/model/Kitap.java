@@ -25,7 +25,7 @@ public class Kitap {
 
     @ManyToOne(fetch = FetchType.LAZY,cascade = {})
     @JoinColumn
-    private YayınEvi yayinEvi;
+    private YayinEvi yayinEvi;
 
 
 }
