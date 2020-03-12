@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>User Form</title>
+
+    <!-- Web Jars -->
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.4.1/css/bootstrap.min.css}" />
+    <script src="/webjars/jquery/4.4.1/jquery.min.js"></script>
+    <script th:src="@{/webjars/bootstrap/4.4.1/js/bootstrap.min.js}"></script>
+
+    <style>
+        input.form-control:active,
+        input.form-control:focus,
+        input.form-control:focus:active,
+        input.form-control{
+            background-color: #ededed;
+            border : 1px solid #a9a9a9;
+        }
+
+        body {
+            color : white;
+        }
+
+    </style>
+
+</head>
+
+<body class = "bg-dark">
+    <div class="container" style="margin-top: 20px" >
+        <div class="row justify-content-center">
+            <div class="col-md-9">
+                <form th:object="${user}" th:action="${action} == 'user' ? @{/signup} : @{/admin/signup}" method="post">
+                    <div class="form-group">
+                        <h2 class = "text-center mb-5"> Sign Up </h2>
+
+                        <div class="row align-items-center justify-content-center mb-3">
+                            <div class="col-md-3 px-0">
+                                <input type="text" th:field="*{firstName}" placeholder = "Firstname" class="form-control cus-inp"/>
+                            </div>
+                            <div class="col-md-3 offset-md-1 px-0">
+                                <input type="text" th:field="*{lastName}" placeholder = "Lastname" class="form-control cus-inp"/>
+                            </div>
+                        </div>
+
+                        <div class="row align-items-center justify-content-center mb-5">
+                            <div class="col-md-3 px-0">
+                                <input type="password"th:field="*{password}" placeholder = "Password" class="form-control cus-inp"/>
+                            </div>
+                            <div class="col-md-3 offset-md-1 px-0">
+                                <input type="password" placeholder = "Verify Password" class="form-control cus-inp"/>
+                            </div>
+                        </div>
+
+
+                        <div class="row align-items-center justify-content-center mb-3">
+                            <div class="col-md-3 px-0">
+                                <input type="text" th:field="*{username}" placeholder = "Username" class="form-control cus-inp"/>
+                            </div>
+                            <div class="col-md-3 offset-md-1 px-0">
+                                <input type="text" placeholder = "D.Tarihi" class="form-control cus-inp"/>
+                            </div>
+                        </div>
+
+                        <div class="row align-items-center justify-content-center mb-3">
+
+                            <div class="col-md-7 px-0">
+                                <input type="text" th:field="*{email}" placeholder = "E-mail" class="form-control cus-inp"/>
+                            </div>
+                        </div>
+
+                        <div class = "row justify-content-center">
+                            <div class = "col-md-7 px-0">
+                                <button type="submit" class="btn mt-3 form-control" style="width: 100%; background-color: #ff0000;color : white;">Kayıt Ol</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

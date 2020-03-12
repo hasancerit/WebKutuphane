@@ -1,6 +1,5 @@
 package com.ozguryazilin.WebKutuphane.WebKutuphane.security;
 
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -13,6 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 public class WebSecurity extends WebSecurityConfigurerAdapter {
     @Autowired
     private UserDetailsService userDetailService;
+
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
@@ -27,7 +27,9 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/").permitAll()
                 .antMatchers("/h2-console/**").permitAll()
-                .antMatchers("/resources/**", "/static/**","/webjars/**").permitAll()
+                .antMatchers("/resources/**", "/static/**", "/webjars/**").permitAll()
+                .antMatchers("/signup","/admin/signup").permitAll()
+                .antMatchers("/test").hasAnyAuthority("ADMIN")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()

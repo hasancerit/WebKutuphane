@@ -4,7 +4,6 @@ import com.ozguryazilin.WebKutuphane.WebKutuphane.model.User;
 import com.ozguryazilin.WebKutuphane.WebKutuphane.model.security.Role;
 import com.ozguryazilin.WebKutuphane.WebKutuphane.repository.RoleRepository;
 import com.ozguryazilin.WebKutuphane.WebKutuphane.repository.UserRepository;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -38,21 +37,21 @@ public class UserLoader implements CommandLineRunner {
 
         User user_admin = new User();
         user_admin.setUsername("hasan");
-        user_admin.setSifre(bCryptPasswordEncoder.encode("123"));
+        user_admin.setPassword(bCryptPasswordEncoder.encode("123"));
         HashSet<Role> roles1 = new HashSet<>();
         roles1.add(role_admin);
         user_admin.setRoles(roles1);
 
         User user_user = new User();
         user_user.setUsername("burak");
-        user_user.setSifre(bCryptPasswordEncoder.encode("123"));
+        user_user.setPassword(bCryptPasswordEncoder.encode("123"));
         HashSet<Role> roles2 = new HashSet<>();
         roles2.add(role_user);
         user_user.setRoles(roles2);
 
         User user_both = new User();
         user_both.setUsername("onur");
-        user_both.setSifre(bCryptPasswordEncoder.encode("123"));
+        user_both.setPassword(bCryptPasswordEncoder.encode("123"));
         HashSet<Role> roles3 = new HashSet<>();
         roles3.add(role_user);
         roles3.add(role_admin);
