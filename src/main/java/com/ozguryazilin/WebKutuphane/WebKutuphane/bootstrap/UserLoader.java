@@ -37,6 +37,8 @@ public class UserLoader implements CommandLineRunner {
 
         User user_admin = new User();
         user_admin.setUsername("hasan");
+        user_admin.setFirstName("Hasan");
+        user_admin.setLastName("Cerit");
         user_admin.setPassword(bCryptPasswordEncoder.encode("123"));
         HashSet<Role> roles1 = new HashSet<>();
         roles1.add(role_admin);

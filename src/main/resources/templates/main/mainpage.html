@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+    <head>
+        <meta charset="UTF-8" />
+        <title>Hello</title>
+
+        <!-- Web Jars -->
+        <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.4.1/css/bootstrap.min.css}" />
+        <script src="/webjars/jquery/4.4.1/jquery.min.js"></script>
+        <script th:src="@{/webjars/bootstrap/4.4.1/js/bootstrap.min.js}"></script>
+        <script th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
+
+
+        <link rel="stylesheet" type="text/css" th:href="@{css/sidemenu.css}">
+        <script th:src="@{js/sidemenu.js}" type="text/javascript"></script>
+    </head>
+
+    <body>
+        <div  th:replace="fragments/sidemenu :: sidemenu">
+        </div>
+
+        <div  th:replace="fragments/sidebar :: sidebar">
+        </div>
+    </body>
+
+</html>

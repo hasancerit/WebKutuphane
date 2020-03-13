@@ -1,0 +1,39 @@
+.hamburger-line{
+    width: 25px;
+    height: 5px;
+    background-color: black;
+    margin-top: 5px;
+}
+
+.shift-right-hamburger{
+    margin-top: 10px;
+    margin-left: 210px;
+    position: fixed;
+    cursor: pointer;
+}
+.shift-left-hamburger{
+    margin-top: 10px;
+    margin-left: 10px;
+    position: fixed;
+    cursor: pointer;
+
+}
+
+.menu{
+    padding-top: 80px;
+    width: 200px;
+    height: 100vh;
+    background-color: #283E4A;
+    transition: width 2s ease-in-out;
+}
+
+.menu-item{
+    color: white;
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 20px;
+}
+
+.disabled{
+    display: none;
+}

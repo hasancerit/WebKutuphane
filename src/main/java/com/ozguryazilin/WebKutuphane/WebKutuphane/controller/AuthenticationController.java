@@ -2,24 +2,40 @@ package com.ozguryazilin.WebKutuphane.WebKutuphane.controller;
 
 import com.ozguryazilin.WebKutuphane.WebKutuphane.model.User;
 import com.ozguryazilin.WebKutuphane.WebKutuphane.service.AuthenticationService;
+import com.ozguryazilin.WebKutuphane.WebKutuphane.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
+import java.security.Principal;
 import java.util.HashSet;
 import java.util.Set;
 
 @Controller
+@SessionAttributes("user")
 public class AuthenticationController {
     @Autowired
     private AuthenticationService authenticationService;
 
+    @Autowired
+    private UserService userService;
+
     @GetMapping("/login")
     public String login(Model model) {
         return "login/login";
+    }
+
+    @GetMapping("/mainpage")
+    public String mainpage(Model model, Principal principal){
+        System.out.println(principal.getName());
+        User currentUser = userService.getUser(principal.getName());
+        System.out.println(currentUser.getUsername());
+        model.addAttribute("user",currentUser);
+        return "main/mainpage";
     }
 
     @GetMapping("/signup")
@@ -50,6 +66,6 @@ public class AuthenticationController {
 
     @GetMapping("/test")
     public String test() {
-        return "login/test";
+        return "main/mainpage";
     }
 }

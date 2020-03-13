@@ -2,18 +2,20 @@ package com.ozguryazilin.WebKutuphane.WebKutuphane.model;
 
 import javax.persistence.*;
 
-
 @Entity
 public class Book {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
-    private String bookNme;
+    private String bookName;
     private String bookSubName;
     private String description;
     private String serialName;
     private String isbnNo;
+
+    @Lob
+    private byte[] bookImage;
 
     @ManyToOne(fetch = FetchType.LAZY,cascade = {})
     @JoinColumn
@@ -31,12 +33,12 @@ public class Book {
         this.id = id;
     }
 
-    public String getBookNme() {
-        return bookNme;
+    public String getBookName() {
+        return bookName;
     }
 
-    public void setBookNme(String bookNme) {
-        this.bookNme = bookNme;
+    public void setBookName(String bookName) {
+        this.bookName = bookName;
     }
 
     public String getBookSubName() {

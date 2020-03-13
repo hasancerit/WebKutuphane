@@ -1,0 +1,23 @@
+<div th:fragment="sidebar">
+    <div class="menu disabled" >
+        <div class="menu-item" style="margin-bottom: 40px">
+            <p th:text = "${user.firstName} +' '+ ${user.lastName}">Hasan CERİT</p>
+        </div>
+
+        <div class="menu-item">
+           <a><span>Kitaplar</span></a>
+        </div>
+        <div class="menu-item">
+            <a><span>Yazarlar</span></a>
+        </div>
+        <div class="menu-item">
+            <a><span>Yayınevleri</span></a>
+        </div>
+        <div class="menu-item">
+            <a th:href="@{/book/add}"><span>Kitap Ekle</span></a>
+        </div>
+        <div class="menu-item">
+            <a><span>Çıkış</span></a>
+        </div>
+    </div>
+</div>
