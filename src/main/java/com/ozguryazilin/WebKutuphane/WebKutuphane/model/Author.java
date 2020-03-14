@@ -12,6 +12,7 @@ public class Author {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
     private String authorName;
+    private String authorLastName;
     private String description;
 
     @OneToMany(mappedBy = "author",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
@@ -47,5 +48,13 @@ public class Author {
 
     public void setBooks(Set<Book> books) {
         this.books = books;
+    }
+
+    public String getAuthorLastName() {
+        return authorLastName;
+    }
+
+    public void setAuthorLastName(String authorLastName) {
+        this.authorLastName = authorLastName;
     }
 }
