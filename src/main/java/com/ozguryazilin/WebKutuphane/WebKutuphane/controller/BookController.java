@@ -9,10 +9,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.security.Principal;
-
 @Controller
 @RequestMapping("/book")
+@SessionAttributes("user")
 public class BookController {
     @Autowired
     private UserService userService;
@@ -21,7 +20,7 @@ public class BookController {
     private BookService bookService;
 
     @GetMapping("/add")
-    public String addBook(Model model, @SessionAttribute("user") User user){
+    public String addBook(Model model, @ModelAttribute("user") User user){
         model.addAttribute("book",new Book());
         model.addAttribute("user",user);
         return "book/addform";
@@ -30,6 +29,6 @@ public class BookController {
     @PostMapping("/add")
     public String handleAddBook(@ModelAttribute Book book, @SessionAttribute("user") User user){
         bookService.addBook(book);
-        return "main/mainpage";
+        return "redirect:/mainpage";
     }
 }

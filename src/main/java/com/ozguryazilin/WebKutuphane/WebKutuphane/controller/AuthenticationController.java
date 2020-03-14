@@ -1,18 +1,18 @@
 package com.ozguryazilin.WebKutuphane.WebKutuphane.controller;
 
+import com.ozguryazilin.WebKutuphane.WebKutuphane.model.Book;
 import com.ozguryazilin.WebKutuphane.WebKutuphane.model.User;
 import com.ozguryazilin.WebKutuphane.WebKutuphane.service.AuthenticationService;
+import com.ozguryazilin.WebKutuphane.WebKutuphane.service.BookService;
 import com.ozguryazilin.WebKutuphane.WebKutuphane.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Controller
@@ -24,17 +24,28 @@ public class AuthenticationController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private BookService bookService;
+
+    @GetMapping("/loginsuccess")
+    public String loadUserToSession(Model model, Principal principal){
+        User currentUser = userService.getUser(principal.getName());
+        model.addAttribute("user",currentUser);
+        return "redirect:/mainpage";
+    }
+
     @GetMapping("/login")
-    public String login(Model model) {
+    public String login(Model model,Principal principal) {
+        if(principal != null){
+            return "redirect:/mainpage";
+        }
         return "login/login";
     }
 
     @GetMapping("/mainpage")
-    public String mainpage(Model model, Principal principal){
-        System.out.println(principal.getName());
-        User currentUser = userService.getUser(principal.getName());
-        System.out.println(currentUser.getUsername());
-        model.addAttribute("user",currentUser);
+    public String mainpage(@SessionAttribute User user,Model model){
+        List<Book> books = bookService.allBooks();
+        model.addAttribute("books",books);
         return "main/mainpage";
     }
 

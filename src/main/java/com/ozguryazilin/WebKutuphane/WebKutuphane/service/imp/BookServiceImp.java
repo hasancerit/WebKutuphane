@@ -10,6 +10,8 @@ import com.ozguryazilin.WebKutuphane.WebKutuphane.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 
 @Service
 public class BookServiceImp implements BookService {
@@ -44,5 +46,10 @@ public class BookServiceImp implements BookService {
         book.setAuthor(author);
 
         bookRepository.save(book);
+    }
+
+    @Override
+    public List<Book> allBooks() {
+        return bookRepository.findAll();
     }
 }

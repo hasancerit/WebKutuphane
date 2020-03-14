@@ -3,11 +3,13 @@ $(document).ready(function () {
         if( $("#hamburger-icon").hasClass("shift-right-hamburger")){
             $("#hamburger-icon").addClass("shift-left-hamburger");
             $("#hamburger-icon").removeClass("shift-right-hamburger");
+            $('#books').removeClass("booksright")
             $(".menu").addClass("disabled")
         }
         else{
             $("#hamburger-icon").removeClass("shift-left-hamburger");
             $("#hamburger-icon").addClass("shift-right-hamburger");
+            $('#books').addClass("booksright")
             $(".menu").removeClass("disabled")
         }
     })

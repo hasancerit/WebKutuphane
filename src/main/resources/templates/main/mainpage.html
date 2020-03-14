@@ -12,8 +12,8 @@
         <script th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
 
 
-        <link rel="stylesheet" type="text/css" th:href="@{css/sidemenu.css}">
-        <script th:src="@{js/sidemenu.js}" type="text/javascript"></script>
+        <link rel="stylesheet" type="text/css" href="css/sidemenu.css">
+        <script src="js/sidemenu.js" type="text/javascript"></script>
     </head>
 
     <body>
@@ -21,6 +21,20 @@
         </div>
 
         <div  th:replace="fragments/sidebar :: sidebar">
+        </div>
+
+        <div id="books" class = "container mt-3">
+            <th:block th:each="book : ${books}">
+                <div class="row mb-2">
+                    <div class="col-md-5 offset-md-1">
+                        <div  th:replace="fragments/bookpost :: bookpost(${book})"></div>
+                    </div>
+
+                    <div class="col-md-5">
+                        <div  th:replace="fragments/bookpost :: bookpost(${book})"></div>
+                    </div>
+                </div>
+            </th:block>
         </div>
     </body>
 

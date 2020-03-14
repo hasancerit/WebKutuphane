@@ -6,20 +6,22 @@
 }
 
 .shift-right-hamburger{
-    margin-top: 10px;
-    margin-left: 210px;
     position: fixed;
+    top: 10px;
+    left: 210px;
     cursor: pointer;
 }
 .shift-left-hamburger{
-    margin-top: 10px;
-    margin-left: 10px;
     position: fixed;
+    top: 10px;
+    left: 10px;
     cursor: pointer;
 
 }
 
 .menu{
+    position: fixed;
+    top: 0px;
     padding-top: 80px;
     width: 200px;
     height: 100vh;
@@ -36,4 +38,9 @@
 
 .disabled{
     display: none;
+}
+
+
+.booksright{
+    margin-left: 200px;
 }
