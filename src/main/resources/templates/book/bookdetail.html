@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8"/>
+    <title>Hello</title>
+
+    <!-- Web Jars -->
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.4.1/css/bootstrap.min.css}"/>
+    <script src="/webjars/jquery/4.4.1/jquery.min.js"></script>
+    <script th:src="@{/webjars/bootstrap/4.4.1/js/bootstrap.min.js}"></script>
+    <script th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
+
+    <link rel="stylesheet" type="text/css" th:href="@{/css/authors.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/sidemenu.css}">
+    <script th:src="@{/js/sidemenu.js}" type="text/javascript"></script>
+
+    <style>
+        {
+            color: red
+        ;
+        }
+
+        /* visited link */
+        p a:visited,
+        p a:link,
+        p a:link,
+        p a:active {
+            color: black;
+            font-size: 1rem;
+            font-weight: 300;
+        }
+    </style>
+</head>
+
+<body>
+
+<div th:replace="fragments/sidemenu :: sidemenu">
+</div>
+
+<div th:replace="fragments/sidebar :: sidebar">
+</div>
+
+<div class="container text-center">
+    <div class="row">
+        <div class="col-lg-10 offset-1">
+            <h1 class="mt-4" th:text="${book.bookName}" style="display: inline">Post Title</h1>
+            <div class="row mb-n3">
+                <div class="col-4 offset-4">
+                    <p class="text-muted" th:text="${book.bookSubName}">
+                        Alt Ad
+                    </p>
+                </div>
+                <div class="col-4 text-right">
+                    <p class="my-0">
+                        <a th:href="@{/publisher/{id}(id = ${book.publisher.id})}"
+                           th:text="${book.publisher.publisherName}">Author</a>
+                    </p>
+                </div>
+            </div>
+            <hr>
+            <p class="my-n2">
+                <a th:href="@{/author/{id}(id = ${book.author.id})}" th:text="${book.author.authorFullname}">Author</a>
+            </p>
+            <hr>
+            <img class="img-fluid rounded" src="http://placehold.it/900x300" alt="">
+            <span th:text="'ISBN No:'+${book.isbnNo}" class="text-muted"></span>
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            <span th:text="'Seri Adı:'+${book.serialName}" class="text-muted"></span>
+
+            <hr>
+
+            <p th:text="${book.description}">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus, vero,
+                obcaecati, aut,
+                error quam sapiente nemo saepe quibusdam sit excepturi nam quia corporis eligendi eos magni recusandae
+                laborum minus inventore?</p>
+            <hr>
+        </div>
+    </div>
+
+
+</div>
+<!-- /.row -->
+
+</div>
+</body>
+
+</html>

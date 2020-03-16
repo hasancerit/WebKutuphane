@@ -1,0 +1,17 @@
+<div th:fragment="search(searching)">
+<div class="searchbar">
+    <form th:object="${searching}" method="post" class="form-inline my-2 my-lg-0" th:action="@{/book/search}">
+        <div style="margin: 0 auto">
+            <input th:field="*{search}" class="form-control form-control-sm mr-2" type="search" placeholder="Ara" aria-label="Ara">
+            <select th:field = "*{action}" class="custom-select custom-select-sm mr-2">
+                <option value="0" selected>Arama</option>
+                <option value="1">Kitap Adı</option>
+                <option value="2">Yazar</option>
+                <option value="3">Seri Adı</option>
+                <option value="4">ISBN No</option>
+            </select>
+            <button class="btn btn-sm btn-dark my-2 my-sm-0" type="submit">Search</button>
+        </div>
+    </form>
+</div>
+</div>

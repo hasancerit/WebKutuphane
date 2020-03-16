@@ -54,11 +54,13 @@
                             <div class="row  mb-3">
                                 <div class="col-md-5 px-0 offset-md-1 text-right">
                                     <span>Yazar Adı:</span>
-                                    <input th:field="*{author.authorName}" type="text" />
+                                    <input th:field="*{author.authorFullname}"  type="text" />
                                 </div>
                                 <div class="col-md-5 px-0 text-right">
-                                    <span>Yazar Soyadı:</span>
-                                    <input th:field="*{author.authorLastName}" type="text" />
+                                    <div>
+                                        <span>Yayın Evi:</span>
+                                        <input th:field="*{publisher.publisherName}" type="text" />
+                                    </div>
                                 </div>
                             </div>
                             <hr class="mb-3">
@@ -68,11 +70,7 @@
                                     <span>Açıklama:</span>
                                     <textarea th:field="*{description}" id="textarea" rows="5" type="text" style=""></textarea>
                                 </div>
-                                <div class="col-md-5 px-0 text-right" >
-                                    <div>
-                                        <span>Yayın Evi:</span>
-                                        <input th:field="*{publisher.publisherName}" type="text" />
-                                    </div>
+                                <div class="col-md-5 px-0" >
                                     <div class="text-center h-100 mt-5">
                                         <button >Fotoğraf Ekle</button>
                                     </div>

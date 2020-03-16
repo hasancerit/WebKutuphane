@@ -1,6 +1,7 @@
 package com.ozguryazilin.WebKutuphane.WebKutuphane.controller;
 
 import com.ozguryazilin.WebKutuphane.WebKutuphane.model.Book;
+import com.ozguryazilin.WebKutuphane.WebKutuphane.model.Searching;
 import com.ozguryazilin.WebKutuphane.WebKutuphane.model.User;
 import com.ozguryazilin.WebKutuphane.WebKutuphane.service.AuthenticationService;
 import com.ozguryazilin.WebKutuphane.WebKutuphane.service.BookService;
@@ -11,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -43,9 +45,25 @@ public class AuthenticationController {
     }
 
     @GetMapping("/mainpage")
-    public String mainpage(@SessionAttribute User user,Model model){
+    public String mainpage(Model model){
         List<Book> books = bookService.allBooks();
+
+        //Değişecek
+        List<Integer> itr = new ArrayList<>();
+        int y;
+        if (books.size()%2==0) y=books.size()/2;
+        else y = (books.size()/2)+1;
+
+        int ind = 0;
+        for(int i = 1; i <= y; i++){
+            itr.add(ind);
+            ind += 2;
+        }
+        model.addAttribute("itr",itr);
+        //
+
         model.addAttribute("books",books);
+        model.addAttribute("searching",new Searching());
         return "main/mainpage";
     }
 

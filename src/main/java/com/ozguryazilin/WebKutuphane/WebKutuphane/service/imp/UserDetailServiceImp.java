@@ -1,4 +1,4 @@
-package com.ozguryazilin.WebKutuphane.WebKutuphane.service;
+package com.ozguryazilin.WebKutuphane.WebKutuphane.service.imp;
 
 import com.ozguryazilin.WebKutuphane.WebKutuphane.model.User;
 import com.ozguryazilin.WebKutuphane.WebKutuphane.model.security.Role;

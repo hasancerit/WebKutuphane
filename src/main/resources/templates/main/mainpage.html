@@ -12,8 +12,8 @@
         <script th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
 
 
-        <link rel="stylesheet" type="text/css" href="css/sidemenu.css">
-        <script src="js/sidemenu.js" type="text/javascript"></script>
+        <link rel="stylesheet" type="text/css" th:href="@{/css/sidemenu.css}">
+        <script th:src="@{/js/sidemenu.js}" type="text/javascript"></script>
     </head>
 
     <body>
@@ -23,16 +23,20 @@
         <div  th:replace="fragments/sidebar :: sidebar">
         </div>
 
-        <div id="books" class = "container mt-3">
-            <th:block th:each="book : ${books}">
+        <div  th:replace="fragments/searching :: search(${searching})"></div>
+
+        <div id="books" class = "container" style="margin-top: 90px">
+            <th:block th:each="it : ${itr}">
                 <div class="row mb-2">
                     <div class="col-md-5 offset-md-1">
-                        <div  th:replace="fragments/bookpost :: bookpost(${book})"></div>
+                        <div  th:replace="fragments/bookpost :: bookpost(${books[it]})"></div>
                     </div>
 
-                    <div class="col-md-5">
-                        <div  th:replace="fragments/bookpost :: bookpost(${book})"></div>
-                    </div>
+                    <th:block th:if="${it+1} < ${#lists.size(books)}">
+                        <div class="col-md-5">
+                            <div th:replace="fragments/bookpost :: bookpost(${books[it+1]})"></div>
+                        </div>
+                    </th:block>
                 </div>
             </th:block>
         </div>

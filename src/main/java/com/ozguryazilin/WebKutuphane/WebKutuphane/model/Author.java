@@ -11,8 +11,7 @@ public class Author {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
-    private String authorName;
-    private String authorLastName;
+    private String authorFullname;
     private String description;
 
     @OneToMany(mappedBy = "author",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
@@ -26,12 +25,12 @@ public class Author {
         this.id = id;
     }
 
-    public String getAuthorName() {
-        return authorName;
+    public String getAuthorFullname() {
+        return authorFullname;
     }
 
-    public void setAuthorName(String authorName) {
-        this.authorName = authorName;
+    public void setAuthorFullname(String authorFullname) {
+        this.authorFullname = authorFullname;
     }
 
     public String getDescription() {
@@ -48,13 +47,5 @@ public class Author {
 
     public void setBooks(Set<Book> books) {
         this.books = books;
-    }
-
-    public String getAuthorLastName() {
-        return authorLastName;
-    }
-
-    public void setAuthorLastName(String authorLastName) {
-        this.authorLastName = authorLastName;
     }
 }

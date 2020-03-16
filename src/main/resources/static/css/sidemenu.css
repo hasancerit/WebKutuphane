@@ -1,3 +1,17 @@
+.menu-a:visited,
+.menu-a:link,
+.menu-a:hover,
+.menu-a:active {
+    color: white;
+    font-size: 1.25rem;
+    font-weight: 300;
+    text-decoration: none;
+}
+
+.menu-a:hover {
+    color: black;
+}
+
 .hamburger-line{
     width: 25px;
     height: 5px;
@@ -43,4 +57,20 @@
 
 .booksright{
     margin-left: 200px;
+}
+
+.searchbar{
+    z-index: 100;
+    position: fixed;
+    top: 10px;
+    width: 60%;
+    height: 60px;
+    margin: 0 auto; /* Will not center vertically and won't work in IE6/7. */
+    left: 0;
+    right: 0;"
+}
+
+
+.container{
+    z-index: 90;
 }
