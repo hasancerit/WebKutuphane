@@ -5,6 +5,7 @@ $(document).ready(function () {
             $("#hamburger-icon").removeClass("shift-right-hamburger");
             $('#books').removeClass("booksright");
             $('#authors').removeClass("authorsright");
+            $('#authordetail').removeClass("authorsright");
             $(".menu").addClass("disabled");
         }
         else{
@@ -12,6 +13,7 @@ $(document).ready(function () {
             $("#hamburger-icon").addClass("shift-right-hamburger");
             $('#books').addClass("booksright");
             $('#authors').addClass("authorsright");
+            $('#authordetail').addClass("authorsright");
             $(".menu").removeClass("disabled");
         }
     })

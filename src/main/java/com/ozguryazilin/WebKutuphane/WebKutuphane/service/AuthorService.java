@@ -8,4 +8,6 @@ public interface AuthorService {
     List<Author> allAuthors();
 
     List<Author> searchBook(String action, String search);
+
+    Author getAuthor(String id);
 }

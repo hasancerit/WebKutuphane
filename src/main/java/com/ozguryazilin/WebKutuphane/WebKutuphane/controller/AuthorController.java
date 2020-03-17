@@ -31,4 +31,10 @@ public class AuthorController {
         model.addAttribute("authors",authors);
         return "author/authors";
     }
+
+    @GetMapping("/{id}")
+    public String getAuthor(@PathVariable String id,Model model){
+        model.addAttribute("author",authorService.getAuthor(id));
+        return "author/authordetail";
+    }
 }

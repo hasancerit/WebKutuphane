@@ -1,6 +1,5 @@
 package com.ozguryazilin.WebKutuphane.WebKutuphane.controller;
 
-import com.ozguryazilin.WebKutuphane.WebKutuphane.model.Author;
 import com.ozguryazilin.WebKutuphane.WebKutuphane.model.Publisher;
 import com.ozguryazilin.WebKutuphane.WebKutuphane.model.Searching;
 import com.ozguryazilin.WebKutuphane.WebKutuphane.service.PublisherService;
@@ -22,13 +21,19 @@ public class PublisherController {
     public String getPublishers(Model model){
         model.addAttribute("publishers",publisherService.findAll());
         model.addAttribute("searching",new Searching());
-        return "main/publishers";
+        return "publisher/publishers";
     }
 
     @PostMapping("/search")
     public String search(@ModelAttribute Searching searching, Model model){
         List<Publisher> publishers = publisherService.searchBook(searching.getAction(),searching.getSearch());
         model.addAttribute("publishers",publishers);
-        return "main/publishers";
+        return "publisher/publishers";
     }
+//
+//    @GetMapping("/{id}")
+//    public String getPublisher(@PathVariable String id){
+//        model.addAttribute("publishers",publisherService.);
+//        return "publisher/publisherdetail";
+//    }
 }

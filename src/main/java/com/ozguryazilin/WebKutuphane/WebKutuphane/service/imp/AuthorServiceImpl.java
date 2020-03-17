@@ -38,4 +38,9 @@ public class AuthorServiceImpl implements AuthorService {
         }
         return authors;
     }
+
+    @Override
+    public Author getAuthor(String id){
+        return authorRepository.getOne(id);
+    }
 }

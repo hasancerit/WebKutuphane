@@ -76,8 +76,8 @@ public class UserLoader implements CommandLineRunner {
 
 
         Author author = new Author();
-        author.setAuthorFullname("hasan cerit");
-        author.setDescription("22 Yaşında yazar");
+        author.setAuthorFullname("Hasan Cerit");
+        author.setDescription("22 Yaşında yazar.22 Yaşında yazar.22 Yaşında yazar.22 Yaşında yazar.");
         authorRepository.save(author);
 
         Author author2 = new Author();
