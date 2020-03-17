@@ -27,6 +27,7 @@ public class BookController {
     public String addBook(Model model, @ModelAttribute("user") User user){
         model.addAttribute("book",new Book());
         model.addAttribute("user",user);
+        model.addAttribute("action","add");
         return "book/addform";
     }
 
@@ -62,5 +63,25 @@ public class BookController {
     public String getDetailPage(@PathVariable String id,Model model){
         model.addAttribute("book",bookService.getBook(id));
         return "book/bookdetail";
+    }
+
+    @GetMapping("/delete/{id}")
+    public String deleteBook(@PathVariable String id){
+        bookService.deleteBook(id);
+        return "redirect:/mainpage";
+    }
+
+    @GetMapping("/update/{id}")
+    public String updateBook(@PathVariable String id,Model model){
+        model.addAttribute("book",bookService.getBook(id));
+        model.addAttribute("action","update");
+        bookService.deleteBook(id);
+        return "book/addform";
+    }
+
+    @PostMapping("/update")
+    public String updateBook(@ModelAttribute Book book){
+        bookService.addBook(book);
+        return "redirect:/mainpage";
     }
 }

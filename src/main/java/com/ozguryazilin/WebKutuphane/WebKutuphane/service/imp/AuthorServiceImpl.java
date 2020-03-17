@@ -43,4 +43,9 @@ public class AuthorServiceImpl implements AuthorService {
     public Author getAuthor(String id){
         return authorRepository.getOne(id);
     }
+
+    @Override
+    public void deleteAuthor(String id) {
+        authorRepository.delete(authorRepository.getOne(id));
+    }
 }

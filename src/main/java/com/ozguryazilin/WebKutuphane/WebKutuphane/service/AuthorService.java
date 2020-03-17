@@ -10,4 +10,6 @@ public interface AuthorService {
     List<Author> searchBook(String action, String search);
 
     Author getAuthor(String id);
+
+    void deleteAuthor(String id);
 }

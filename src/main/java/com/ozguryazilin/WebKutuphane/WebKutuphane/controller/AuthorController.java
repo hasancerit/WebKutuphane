@@ -37,4 +37,25 @@ public class AuthorController {
         model.addAttribute("author",authorService.getAuthor(id));
         return "author/authordetail";
     }
+
+    @GetMapping("/delete/{id}")
+    public String deleteBook(@PathVariable String id){
+        authorService.deleteAuthor(id);
+        return "redirect:/author";
+    }
+/*
+    @GetMapping("/update/{id}")
+    public String updateBook(@PathVariable String id,Model model){
+        model.addAttribute("book",bookService.getBook(id));
+        model.addAttribute("action","update");
+        bookService.deleteBook(id);
+        return "book/addform";
+    }
+
+    @PostMapping("/update")
+    public String updateBook(@ModelAttribute Book book){
+        bookService.addBook(book);
+        return "redirect:/mainpage";
+    }
+ */
 }

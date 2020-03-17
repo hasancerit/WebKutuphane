@@ -30,10 +30,10 @@ public class PublisherController {
         model.addAttribute("publishers",publishers);
         return "publisher/publishers";
     }
-//
-//    @GetMapping("/{id}")
-//    public String getPublisher(@PathVariable String id){
-//        model.addAttribute("publishers",publisherService.);
-//        return "publisher/publisherdetail";
-//    }
+
+    @GetMapping("/{id}")
+    public String getPublisher(@PathVariable String id,Model model){
+        model.addAttribute("publisher",publisherService.getPublisher(id));
+        return "publisher/publisherdetail";
+    }
 }

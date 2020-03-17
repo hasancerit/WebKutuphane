@@ -11,5 +11,7 @@ public interface BookService {
 
     List<Book> searchBook(String action, String search);
 
-    public Book getBook(String id);
+    Book getBook(String id);
+
+    void deleteBook(String id);
 }

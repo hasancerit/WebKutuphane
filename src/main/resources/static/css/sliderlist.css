@@ -119,6 +119,7 @@
 }
 
 .for_slick_slider{
+    margin: 0 auto;
     display: flex;
     width: 550px;
     height: 150px;
@@ -151,4 +152,14 @@
 .slick-next{
     background-image: url("/img/rightarr.png");
     margin-left: 0px;
+}
+
+.card{
+    border: 1px solid #808080	;
+}
+
+.card hr{
+    border: 0.5px solid #7e7e7e;
+    margin-left: 5px;
+    width: 90%;
 }

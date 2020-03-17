@@ -8,4 +8,6 @@ public interface PublisherService {
     List<Publisher> findAll();
 
     List<Publisher> searchBook(String action, String search);
+
+    Publisher getPublisher(String id);
 }

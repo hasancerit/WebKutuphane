@@ -14,7 +14,7 @@ public class Author {
     private String authorFullname;
     private String description;
 
-    @OneToMany(mappedBy = "author",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "author",fetch = FetchType.LAZY)
     private Set<Book> books;
 
     public String getId() {

@@ -18,6 +18,11 @@
     <script th:src="@{/js/sliderlistcustom.js}" type="text/javascript"></script>
 
     <style>
+        .row hr{
+            border: 1.4px solid 	#D3D3D3;
+            border-radius: 2px;
+        }
+
         .card img{
             margin-left: 4px;
             margin-top: 3px;
@@ -51,14 +56,35 @@
 <div th:replace="fragments/sidebar :: sidebar">
 </div>
 
-<div id="authordetail" class="container mt-3">
+<div id="authordetail" class="container mt-5 text-center">
+    <div class="row">
+        <div class="col-md-2 text-left align-self-center">
+            <a th:href="@{/author/delete/{id}(id=${author.id})}"><img th:src="@{/img/delete.png}" width="30px" height="30px"/></a>
+            <a th:href="@{/author/update/{id}(id=${author.id})}"><img th:src="@{/img/edit.png}" width="30px" height="30px"/></a>
+        </div>
+        <div class="col-md-8">
+            <h1 th:text="${author.authorFullname}">Baslik</h1>
+        </div>
+    </div>
     <div>
-        <h3 th:text="${author.authorFullname}">Baslik</h3>
     </div>
-    <div class="w-50" style="height: 200px">
-        <p th:text="${author.description}"></p>
+    <hr class="mb-4">
+    <div style="height: 200px">
+        <p style="font-size: 18px" th:text="${author.description}"></p>
     </div>
-    <div style="margin-left: -30px">
+
+    <div class="row mb-3">
+        <div class="col-md-5 align-self-center p-0">
+            <hr>
+        </div>
+        <div class="col-md-2 align-self-center p-0">
+            <span style="font-size: 25px">Eserleri</span>
+        </div>
+        <div class="col-md-5 align-self-center p-0">
+            <hr>
+        </div>
+    </div>
+    <div>
         <th:block th:if="${#lists.size(author.books)} == 1">
             <div class="for_slick_slider multiple-items" data-slick='{"slidesToShow": 1, "slidesToScroll": 1}'>
                 <div th:replace="fragments/author :: item(books = ${author.books},mr=true)"></div>

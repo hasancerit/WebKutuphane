@@ -1,5 +1,5 @@
 <th:block th:fragment="item(books,mr)">
-    <th:block th:each="book : ${author.books}">
+    <th:block th:each="book : ${books}">
         <div class="items">
             <div class="card" style="width: 100px;height: 150px;" th:classappend="${mr} ? ml-2 : none">
                 <img src="https://placeimg.com/90/100/any" width="90px" height="100px">

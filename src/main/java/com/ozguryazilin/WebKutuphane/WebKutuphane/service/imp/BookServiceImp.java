@@ -94,4 +94,9 @@ public class BookServiceImp implements BookService {
     public Book getBook(String id){
         return bookRepository.getOne(id);
     }
+
+    @Override
+    public void deleteBook(String id){
+        bookRepository.delete(bookRepository.getOne(id));
+    }
 }

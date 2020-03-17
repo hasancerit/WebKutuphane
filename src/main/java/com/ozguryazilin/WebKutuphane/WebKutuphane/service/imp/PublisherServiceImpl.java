@@ -25,6 +25,11 @@ public class PublisherServiceImpl implements PublisherService {
     }
 
     @Override
+    public Publisher getPublisher(String id){
+        return publisherRepository.getOne(id);
+    }
+
+    @Override
     public List<Publisher> searchBook(String action, String search) {
         List<Publisher> publishers = new ArrayList<>();
         switch (action){
