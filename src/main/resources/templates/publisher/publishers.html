@@ -43,7 +43,7 @@
             <div class="card-body">
                 <h5 class="card-title" th:text="${publisher.publisherName}">Hasan CERİT</h5>
                 <p class="card-text" th:text="${publisher.description}">With supporting text below as a natural lead-in to additional content.</p>
-                <a th:href="@{/publisher/${publisher.id}}">Detay</a>
+                <a th:href="@{/publisher/{id}(id=${publisher.id})}">Detay</a>
             </div>
         </div>
     </div>

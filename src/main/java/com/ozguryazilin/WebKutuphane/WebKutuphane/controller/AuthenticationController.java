@@ -1,6 +1,5 @@
 package com.ozguryazilin.WebKutuphane.WebKutuphane.controller;
 
-import com.ozguryazilin.WebKutuphane.WebKutuphane.model.Book;
 import com.ozguryazilin.WebKutuphane.WebKutuphane.model.Searching;
 import com.ozguryazilin.WebKutuphane.WebKutuphane.model.User;
 import com.ozguryazilin.WebKutuphane.WebKutuphane.service.AuthenticationService;
@@ -10,15 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
 import java.security.Principal;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 @Controller
-@SessionAttributes("user")
 public class AuthenticationController {
     @Autowired
     private AuthenticationService authenticationService;
@@ -29,15 +22,8 @@ public class AuthenticationController {
     @Autowired
     private BookService bookService;
 
-    @GetMapping("/loginsuccess")
-    public String loadUserToSession(Model model, Principal principal){
-        User currentUser = userService.getUser(principal.getName());
-        model.addAttribute("user",currentUser);
-        return "redirect:/mainpage";
-    }
-
     @GetMapping("/login")
-    public String login(Model model,Principal principal) {
+    public String login(Principal principal) {
         if(principal != null){
             return "redirect:/mainpage";
         }
@@ -45,27 +31,14 @@ public class AuthenticationController {
     }
 
     @GetMapping("/mainpage")
-    public String mainpage(Model model){
-        List<Book> books = bookService.allBooks();
-
-        //Değişecek
-        List<Integer> itr = new ArrayList<>();
-        int y;
-        if (books.size()%2==0) y=books.size()/2;
-        else y = (books.size()/2)+1;
-
-        int ind = 0;
-        for(int i = 1; i <= y; i++){
-            itr.add(ind);
-            ind += 2;
-        }
-        model.addAttribute("itr",itr);
-        //
-
-        model.addAttribute("books",books);
+    public String mainpage(Model model,@SessionAttribute("user") User user){
+        model.addAttribute("books",bookService.allBooks());
         model.addAttribute("searching",new Searching());
+        model.addAttribute("user",user);
         return "main/mainpage";
     }
+
+
 
     @GetMapping("/signup")
     public String signup(Model model) {
@@ -93,8 +66,8 @@ public class AuthenticationController {
         return "login/login";
     }
 
-    @GetMapping("/test")
-    public String test() {
-        return "main/mainpage";
+    @GetMapping("/successlogout")
+    public String successlogout(){
+        return "redirect:/login";
     }
 }

@@ -23,7 +23,6 @@ public class UserDetailServiceImp  implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByUsername(username);
-        System.out.println(user.getPassword());
         if (user == null) {
             //ExceptionHandler ile anlamlı bir sayfaya yönlenecek
             throw new UsernameNotFoundException(username);
@@ -31,7 +30,6 @@ public class UserDetailServiceImp  implements UserDetailsService {
 
 
         Set<GrantedAuthority> roles = new HashSet<>();
-        System.out.println(user.getRoles().size());
         for(Role r : user.getRoles())
             roles.add(new SimpleGrantedAuthority(r.getRole()));
 

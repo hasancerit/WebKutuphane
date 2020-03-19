@@ -1,0 +1,18 @@
+.container{
+    width: 970px;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);;
+    padding: 10px;
+    grid-column-gap : 10px;
+    grid-row-gap : 10px;
+    margin: 0px auto;
+    position: relative;
+    top: 60px;
+}
+
+.booksright{
+    margin-left: 300px;
+}

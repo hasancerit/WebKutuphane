@@ -13,7 +13,7 @@ public class Publisher {
     private String publisherName;
     private String description;
 
-    @OneToMany(mappedBy = "publisher",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "publisher",fetch = FetchType.LAZY)
     private Set<Book> books;
 
     public String getId() {

@@ -10,4 +10,8 @@ public interface PublisherService {
     List<Publisher> searchBook(String action, String search);
 
     Publisher getPublisher(String id);
+
+    void deletePublisher(String id);
+
+    void addPublisher(Publisher publisher);
 }

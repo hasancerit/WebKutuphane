@@ -88,4 +88,14 @@ public class Book {
     public void setPublisher(Publisher publisher) {
         this.publisher = publisher;
     }
+
+
+
+    public byte[] getBookImage() {
+        return bookImage;
+    }
+
+    public void setBookImage(byte[] bookImage) {
+        this.bookImage = bookImage;
+    }
 }

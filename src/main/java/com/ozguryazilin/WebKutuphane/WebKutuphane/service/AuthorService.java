@@ -12,4 +12,6 @@ public interface AuthorService {
     Author getAuthor(String id);
 
     void deleteAuthor(String id);
+
+    void addAuthor(Author author);
 }

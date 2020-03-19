@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
 
 <head>
     <meta charset="UTF-8"/>
@@ -57,16 +59,20 @@
 </div>
 
 <div id="authordetail" class="container mt-5 text-center">
-    <div class="row">
-        <div class="col-md-2 text-left align-self-center">
+    <div class="row" >
+        <div sec:authorize="hasAuthority('ADMIN')" class="col-md-2 text-left align-self-center">
             <a th:href="@{/author/delete/{id}(id=${author.id})}"><img th:src="@{/img/delete.png}" width="30px" height="30px"/></a>
             <a th:href="@{/author/update/{id}(id=${author.id})}"><img th:src="@{/img/edit.png}" width="30px" height="30px"/></a>
+        </div>
+        <div sec:authorize="!hasAuthority('ADMIN')" class="col-md-2 text-left align-self-center">
+            <div class="offset-md-2"></div>
         </div>
         <div class="col-md-8">
             <h1 th:text="${author.authorFullname}">Baslik</h1>
         </div>
-    </div>
-    <div>
+        <div class="col-md-2 text-right align-self-center">
+            <a th:href="@{/author/{id}/addbook(id = ${author.id})}"><img th:src="@{/img/addbook.png}" width="30px" height="30px"/></a>
+        </div>
     </div>
     <hr class="mb-4">
     <div style="height: 200px">

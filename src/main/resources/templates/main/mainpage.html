@@ -11,7 +11,7 @@
         <script th:src="@{/webjars/bootstrap/4.4.1/js/bootstrap.min.js}"></script>
         <script th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
 
-
+        <link rel="stylesheet" type="text/css" th:href="@{/css/books.css}">
         <link rel="stylesheet" type="text/css" th:href="@{/css/sidemenu.css}">
         <script th:src="@{/js/sidemenu.js}" type="text/javascript"></script>
     </head>
@@ -23,22 +23,26 @@
         <div  th:replace="fragments/sidebar :: sidebar">
         </div>
 
-        <div  th:replace="fragments/searching :: search(${searching})"></div>
-
-        <div id="books" class = "container" style="margin-top: 90px">
-            <th:block th:each="it : ${itr}">
-                <div class="row mb-2">
-                    <div class="col-md-5 offset-md-1">
-                        <div  th:replace="fragments/bookpost :: bookpost(${books[it]})"></div>
-                    </div>
-
-                    <th:block th:if="${it+1} < ${#lists.size(books)}">
-                        <div class="col-md-5">
-                            <div th:replace="fragments/bookpost :: bookpost(${books[it+1]})"></div>
-                        </div>
-                    </th:block>
+        <div class="searchbar">
+            <form th:object="${searching}" method="post" class="form-inline my-2 my-lg-0" th:action="@{/book/search}">
+                <div style="margin: 0 auto">
+                    <input th:field="*{search}" class="form-control form-control-sm mr-2" type="search" placeholder="Ara" aria-label="Ara">
+                    <select th:field = "*{action}" class="custom-select custom-select-sm mr-2">
+                        <option value="0" selected>Arama</option>
+                        <option value="1">Kitap Adı</option>
+                        <option value="2">Yazar</option>
+                        <option value="3">Seri Adı</option>
+                        <option value="4">ISBN No</option>
+                    </select>
+                    <button class="btn btn-sm btn-dark my-2 my-sm-0" type="submit">Search</button>
                 </div>
-            </th:block>
+            </form>
+        </div>
+
+        <div id="books" class = "grid-container container mt-4" style="margin-top: 90px">
+                <div th:each="book : ${books}" class="grid-item">
+                    <div  th:replace="fragments/bookpost :: bookpost(${book})"></div>
+                </div>
         </div>
     </body>
 

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8"/>
+    <title>Hello</title>
+
+    <!-- Web Jars -->
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.4.1/css/bootstrap.min.css}"/>
+    <script src="/webjars/jquery/4.4.1/jquery.min.js"></script>
+    <script th:src="@{/webjars/bootstrap/4.4.1/js/bootstrap.min.js}"></script>
+    <script th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
+
+
+    <link rel="stylesheet" type="text/css" th:href="@{/css/sidemenu.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/addform.css}">
+    <script th:src="@{/js/sidemenu.js}" type="text/javascript"></script>
+</head>
+
+<body>
+<div th:replace="fragments/sidemenu :: sidemenu"></div>
+<div th:replace="fragments/sidebar :: sidebar"></div>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-9">
+            <form th:object="${author}" th:action="${action} == 'add' ? @{/author/add} : @{/author/update}"
+                  method="post">
+                <th:block th:if="${action} != 'add'">
+                    <input type="hidden" id="id" name="id" th:value="${author.id}">
+                </th:block>
+                <div class="form-group">
+                    <div class="row justify-content-center">
+                        <div class="col-md-auto px-0">
+                            <h2 class="text-center"
+                                th:text="${action} == 'add' ? 'Yeni Yazar Ekle' : 'Yazarı Güncelle'"></h2>
+                        </div>
+                    </div>
+                    <hr class="w-50 mb-5">
+                    <div class="row mb-3 justify-content-center">
+                        <div class="col-md-auto px-0">
+                            <div class="mb-1">
+                                <span>Yazar Adı:</span>
+                            </div>
+                            <div>
+                                <input th:field="*{authorFullname}" type="text"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center mb-4">
+                        <div class="col-md-auto px-0 ">
+                            <div class="mb-1">
+                                <span>Açıklama:</span>
+                            </div>
+                            <div>
+                                <textarea th:field="*{description}" id="textarea" rows="5" type="text"
+                                          style=""></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row justify-content-center">
+                        <div class="col-md-auto px-0">
+                            <button type="submit" class="btn mt-3 form-control"
+                                    style="width: 250px; background-color: #ff0000;color : white;">Onayla
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+
+</html>

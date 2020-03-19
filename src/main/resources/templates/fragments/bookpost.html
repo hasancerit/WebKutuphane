@@ -1,19 +1,22 @@
 <div th:fragment="bookpost(book)">
-    <div class="card flex-md-row mb-4 box-shadow h-md-250" >
-        <div class="card-body d-flex flex-column align-items-start w-50">
+    <div class="card flex-md-row mb-4 box-shadow h-md-250" style="max-height: 250px !important;">
+        <div class="card-body d-flex flex-column align-items-start" style="max-height: 250px !important;">
             <h3 class="mb-0">
                 <span class="text-dark" th:text="${book.bookName}"> Name </span>
             </h3>
             <div class="mb-1 text-muted" th:text="${book.bookSubName}">SubName</div>
 
-            <a class="d-inline-block mb-2 text-success" th:text="'Yazar: '+${book.author.authorFullname}"> <strong>User</strong></a>
+
+            <a class="d-inline-block mb-2 text-success" th:href="${book.author} != null ? @{/author/{id}(id = ${book.author.id})} : @{/yazaryok}" th:text="${book.author} != null ? ${book.author.authorFullname} : '-'">Author</a>
 
             <p class="card-text mb-2">
                 <span class="text-dark" th:text="${book.description}">Açıklama</span>
             </p>
 
             <p class="card-text mb-1">
-                <span class="text-dark" th:text="'Yayin Evi: '+${book.publisher.publisherName}" style="font-weight: lighter;">Yayıncı</span>
+                <a th:href="${book.publisher} != null ? @{/publisher/{id}(id = ${book.publisher.id})} : @{/publisheryok}">
+                    <span  th:text="${book.publisher} != null ? ${book.publisher.publisherName} : '-'"></span>
+                </a>
             </p>
 
             <a th:href="@{/book/{id}(id=${book.id})}">Detay</a>

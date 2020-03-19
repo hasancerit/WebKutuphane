@@ -6,6 +6,7 @@ import com.ozguryazilin.WebKutuphane.WebKutuphane.repository.BookRepository;
 import com.ozguryazilin.WebKutuphane.WebKutuphane.repository.PublisherRepository;
 import com.ozguryazilin.WebKutuphane.WebKutuphane.service.PublisherService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -43,6 +44,25 @@ public class PublisherServiceImpl implements PublisherService {
                 break;
         }
         return publishers;
+    }
+
+
+    @Override
+    public void deletePublisher(String id) {
+        Publisher publisher = publisherRepository.getOne(id);
+        for(Book b : publisher.getBooks()){
+            b.setPublisher(null);
+            bookRepository.save(b);
+        }
+        publisherRepository.delete(publisher);
+    }
+
+    @Override
+    public void addPublisher(Publisher publisher) {
+        /*
+        *publisher adı boş ise hata fırlatılacak
+         */
+        publisherRepository.save(publisher);
     }
 
 }

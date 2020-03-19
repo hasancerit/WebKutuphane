@@ -25,6 +25,9 @@
             <div class="row justify-content-center">
                 <div class="col-md-9">
                     <form th:object="${book}" th:action="${action} == 'add' ? @{/book/add} : @{/book/update}" method="post">
+                        <th:block th:if="${action} != add">
+                            <input type="hidden" id="id" name="id" th:value="${book.id}">
+                        </th:block>
                         <div class="form-group">
                             <h2 class = "text-center" th:text="${action} == 'add' ? 'Yeni Kitap Ekle' : 'Kitabı Güncelle'"> </h2>
                             <hr class="w-50 mb-5">

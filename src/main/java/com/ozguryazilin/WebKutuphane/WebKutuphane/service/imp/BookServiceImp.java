@@ -28,33 +28,46 @@ public class BookServiceImp implements BookService {
 
     @Override
     public void addBook(Book book) {
-        List<Publisher> publishers = publisherRepository.findByPublisherName(book.getPublisher().getPublisherName());
-        Publisher publisher;
-        if(publishers.size() == 0){
-            publisher = book.getPublisher();
-            publisher.setDescription("");
+        /*
+        * Kitap adı boş işe hata fırlatılacak
+        * */
 
-            publisher = publisherRepository.save(publisher);
-        }else {
-            System.out.println(publishers.get(0).getPublisherName());
-            publisher = publishers.get(0);
+        //Girilen bir publisher var ise
+        if(!(book.getPublisher().getPublisherName().equalsIgnoreCase(""))){
+            List<Publisher> publishers = publisherRepository.findByPublisherName(book.getPublisher().getPublisherName());
+            Publisher publisher;
+            //Fakat veri tabanında yok ise
+            if(publishers.size() == 0){
+                //Publisher'ı name ile birlikte kaydet.
+                publisher = book.getPublisher();
+                publisher.setDescription("");
+
+                publisher = publisherRepository.save(publisher);
+            }else { //veri tabanında da varsa, ilk publisherı al
+                publisher = publishers.get(0);
+            }
+            book.setPublisher(publisher);
+        }else{ //Kullanici publisher girmediyse
+            book.setPublisher(null);
         }
 
 
-        List<Author> authors = authorRepository.findByAuthorFullname(book.getAuthor().getAuthorFullname());
-        Author author;
-        if(authors.size() == 0){
-            author = book.getAuthor();
-            author.setDescription("");
+        if(!book.getAuthor().getAuthorFullname().equalsIgnoreCase("")){
+            List<Author> authors = authorRepository.findByAuthorFullname(book.getAuthor().getAuthorFullname());
+            Author author;
+            if(authors.size() == 0){
+                author = book.getAuthor();
+                author.setDescription("");
 
-            author = authorRepository.save(author);
+                author = authorRepository.save(author);
+            }else{
+                author = authors.get(0);
+            }
+
+            book.setAuthor(author);
         }else{
-           author = authors.get(0);
+            book.setAuthor(null);
         }
-
-
-        book.setPublisher(publisher);
-        book.setAuthor(author);
 
         bookRepository.save(book);
     }
@@ -62,6 +75,27 @@ public class BookServiceImp implements BookService {
     @Override
     public List<Book> allBooks() {
         return bookRepository.findAll();
+    }
+
+    /*Eger veritabanındaki herhangi bir kitaba yazar veya yayin evi girilmedi ise
+    * yazar veya yayın evin olustararak adini "-" yap. Aksi takdirde thymeleaf null hatası fırlatır.
+    * */
+    @Override
+    public List<Book> allBooksToPage() {
+        List<Book> books = bookRepository.findAll();
+        for(Book b : books){
+            if(b.getAuthor() == null) {
+                Author author = new Author();
+                author.setAuthorFullname("-");
+                b.setAuthor(author);
+            }
+            if(b.getPublisher() == null){
+                Publisher publisher = new Publisher();
+                publisher.setPublisherName("-");
+                b.setPublisher(publisher);
+            }
+        }
+        return books;
     }
 
     @Override

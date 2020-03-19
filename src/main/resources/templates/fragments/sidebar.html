@@ -13,11 +13,19 @@
         <div class="menu-item">
             <a th:href="@{/publisher}" class="menu-a"><span>Yayınevleri</span></a>
         </div>
-        <div class="menu-item">
+
+        <div class="menu-item" style="margin-top: 30px">
             <a th:href="@{/book/add}" class="menu-a"><span>Kitap Ekle</span></a>
         </div>
         <div class="menu-item">
-            <a>Çıkış</a>
+            <a th:href="@{/author/add}" class="menu-a"><span>Yazar Ekle</span></a>
+        </div>
+        <div class="menu-item">
+            <a th:href="@{/publisher/add}" class="menu-a"><span>Yayınevi Ekle</span></a>
+        </div>
+
+        <div class="menu-item" style="margin-top: 30px">
+            <a th:href="@{/logout}">Çıkış</a>
         </div>
     </div>
 </div>

@@ -16,6 +16,10 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
+
+    @Autowired
+    private LoginSuccessHandler loginSuccessHandler;
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailService).passwordEncoder(bCryptPasswordEncoder);
@@ -28,13 +32,24 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
                 .antMatchers("/").permitAll()
                 .antMatchers("/h2-console/**").permitAll()
                 .antMatchers("/resources/**", "/static/**","/css/**", "/img/**","/webjars/**").permitAll()
-                .antMatchers("/signup","/admin/signup").permitAll()
+                .antMatchers("/signup","/admin/signup","/successlogout").permitAll()
                 .antMatchers("/test").hasAnyAuthority("ADMIN")
+                .antMatchers("/book/delete/**","/author/delete/**","publisher/delete/**").hasAnyAuthority("ADMIN")
+                .antMatchers("/book/update/**","/author/update/**","publisher/update/**").hasAnyAuthority("ADMIN")
                 .anyRequest().authenticated()
                 .and()
+
                 .formLogin()
                 .loginPage("/login")
-                .defaultSuccessUrl("/loginsuccess")
+                .successHandler(loginSuccessHandler)
+                .permitAll()
+                .and()
+
+                .logout()
+                .logoutUrl("/logout")
+                .invalidateHttpSession(true)
+                .deleteCookies("JSESSIONID")
+                .logoutSuccessUrl("/successlogout")
                 .permitAll();
 
         http.csrf().disable();

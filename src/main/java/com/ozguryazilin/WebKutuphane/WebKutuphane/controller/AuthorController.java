@@ -1,6 +1,7 @@
 package com.ozguryazilin.WebKutuphane.WebKutuphane.controller;
 
 import com.ozguryazilin.WebKutuphane.WebKutuphane.model.Author;
+import com.ozguryazilin.WebKutuphane.WebKutuphane.model.Book;
 import com.ozguryazilin.WebKutuphane.WebKutuphane.model.Searching;
 import com.ozguryazilin.WebKutuphane.WebKutuphane.model.User;
 import com.ozguryazilin.WebKutuphane.WebKutuphane.service.AuthorService;
@@ -25,6 +26,20 @@ public class AuthorController {
         return "author/authors";
     }
 
+    @GetMapping("/add")
+    public String addAuthor(Model model, @ModelAttribute("user") User user){
+        model.addAttribute("author",new Author());
+        model.addAttribute("user",user);
+        model.addAttribute("action","add");
+        return "author/addform";
+    }
+
+    @PostMapping("/add")
+    public String handeAddAuthor(@ModelAttribute Author author){
+        authorService.addAuthor(author);
+        return "redirect:/author";
+    }
+
     @PostMapping("/search")
     public String search(@ModelAttribute Searching searching,Model model){
         List<Author> authors = authorService.searchBook(searching.getAction(),searching.getSearch());
@@ -39,23 +54,31 @@ public class AuthorController {
     }
 
     @GetMapping("/delete/{id}")
-    public String deleteBook(@PathVariable String id){
+    public String deleteAuthor(@PathVariable String id){
         authorService.deleteAuthor(id);
         return "redirect:/author";
     }
-/*
+
     @GetMapping("/update/{id}")
-    public String updateBook(@PathVariable String id,Model model){
-        model.addAttribute("book",bookService.getBook(id));
+    public String updateAuthor(@PathVariable String id,Model model){
+        model.addAttribute("author",authorService.getAuthor(id));
         model.addAttribute("action","update");
-        bookService.deleteBook(id);
-        return "book/addform";
+        return "author/addform";
     }
 
     @PostMapping("/update")
-    public String updateBook(@ModelAttribute Book book){
-        bookService.addBook(book);
-        return "redirect:/mainpage";
+    public String updateAuthor(@ModelAttribute Author author){
+        authorService.addAuthor(author);
+        return "redirect:/author";
     }
- */
+
+    @GetMapping("/{id}/addbook")
+    public String addBookToAuthor(Model model,@PathVariable String id){
+        Book book = new Book();
+        book.setAuthor(authorService.getAuthor(id));
+        model.addAttribute("book",book);
+        model.addAttribute("action","byauthor");
+        return "book/addformap";
+    }
+
 }

@@ -46,6 +46,19 @@ public class AuthorServiceImpl implements AuthorService {
 
     @Override
     public void deleteAuthor(String id) {
-        authorRepository.delete(authorRepository.getOne(id));
+        Author author = authorRepository.getOne(id);
+        for(Book b : author.getBooks()){
+            b.setAuthor(null);
+            bookRepository.save(b);
+        }
+        authorRepository.delete(author);
+    }
+
+    @Override
+    public void addAuthor(Author author) {
+        /*
+        * Author adı boş ise hata fırlatılacak
+         */
+        authorRepository.save(author);
     }
 }
