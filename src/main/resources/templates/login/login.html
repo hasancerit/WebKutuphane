@@ -35,17 +35,17 @@
                 <form method="post">
 
                     <div class="form-group">
-                        <h2 class = "text-center mb-5"> Login </h2>
+                        <h2 class = "text-center mb-5"> Giriş Yap </h2>
 
                         <div class="row align-items-center justify-content-center mb-3">
                             <div class="col-md-4 px-0">
-                                <input type="text" name="username" placeholder = "Username" class="form-control cus-inp"/>
+                                <input type="text" name="username" placeholder = "Kullanıcı Adı" class="form-control cus-inp"/>
                             </div>
                         </div>
 
                         <div class="row align-items-center justify-content-center mb-5">
                             <div class="col-md-4 px-0">
-                                <input type="password" name="password" placeholder = "Password" class="form-control cus-inp"/>
+                                <input type="password" name="password" placeholder = "Şifre" class="form-control cus-inp"/>
                             </div>
                         </div>
 
@@ -54,22 +54,24 @@
                                 <button type="submit" class="btn mt-3 form-control" style="width: 100%; background-color: #ff0000;color : white;">Giriş</button>
                             </div>
 
-                            <div th:if="${param.error}">
-                                Invalid username and password.
+                            <div th:if="${param.error}" class="w-100"></div>
+                            <div th:if="${param.error}" class="mb-4 text-danger">
+                                Geçersiz Kullanıcı Adı ya da Şifre.
                             </div>
 
-                            <div th:if="${param.logout}">
-                                You have been logged out.
-                            </div>
-
-                            <div class="w-100"></div>
-                            <div class = "col-md-4 px-0 text-center">
-                                <a th:href="@{/signup}">Sign Up!</a>
+                            <div th:if="${param.logout}" class="w-100"></div>
+                            <div th:if="${param.logout}" class="mb-4 text-info">
+                                Çıkış Yapıldı.
                             </div>
 
                             <div class="w-100"></div>
                             <div class = "col-md-4 px-0 text-center">
-                                <a th:href="@{/admin/signup}">Sign Up for Admin!</a>
+                                <a th:href="@{/signup}">Kayıt Ol!</a>
+                            </div>
+
+                            <div class="w-100"></div>
+                            <div class = "col-md-4 px-0 text-center">
+                                <a th:href="@{/admin/signup}">Admin Olarak Kayıt Ol!</a>
                             </div>
                         </div>
                     </div>

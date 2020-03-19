@@ -65,9 +65,4 @@ public class AuthenticationController {
         authenticationService.handleSignupAdmin(user);
         return "login/login";
     }
-
-    @GetMapping("/successlogout")
-    public String successlogout(){
-        return "redirect:/login";
-    }
 }

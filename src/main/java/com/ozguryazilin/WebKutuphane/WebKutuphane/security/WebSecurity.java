@@ -49,7 +49,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
                 .logoutUrl("/logout")
                 .invalidateHttpSession(true)
                 .deleteCookies("JSESSIONID")
-                .logoutSuccessUrl("/successlogout")
+                .logoutSuccessUrl("/login?logout")
                 .permitAll();
 
         http.csrf().disable();
