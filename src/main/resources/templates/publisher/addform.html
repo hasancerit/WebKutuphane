@@ -6,26 +6,27 @@
     <title>Hello</title>
 
     <!-- Web Jars -->
-    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.4.1/css/bootstrap.min.css}"/>
-    <script src="/webjars/jquery/4.4.1/jquery.min.js"></script>
-    <script th:src="@{/webjars/bootstrap/4.4.1/js/bootstrap.min.js}"></script>
     <script th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.4.1/css/bootstrap.min.css}"/>
+    <script th:src="@{/webjars/bootstrap/4.4.1/js/bootstrap.min.js}"></script>
 
 
     <link rel="stylesheet" type="text/css" th:href="@{/css/sidemenu.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/addform.css}">
 
     <script th:src="@{/js/sidemenu.js}" type="text/javascript"></script>
+    <script th:src="@{/js/controls.js}" type="text/javascript"></script>
+
 </head>
 
 <body>
 <div th:replace="fragments/sidemenu :: sidemenu"></div>
 <div th:replace="fragments/sidebar :: sidebar"></div>
 
-<div class="container">
+<div class="container mt-3">
     <div class="row justify-content-center">
         <div class="col-md-9">
-            <form th:object="${publisher}" th:action="${action} == 'add' ? @{/publisher/add} : @{/publisher/update}"
+            <form id="addpublisherform" onsubmit="return validateAddPublisher()" th:object="${publisher}" th:action="${action} == 'add' ? @{/publisher/add} : @{/publisher/update}"
                   method="post">
                 <th:block th:if="${action} != 'add'">
                     <input type="hidden" id="id" name="id" th:value="${publisher.id}">
@@ -43,7 +44,7 @@
                                 <span>Yayınevi Adı:</span>
                             </div>
                             <div>
-                                <input th:field="*{publisherName}" type="text"/>
+                                <input maxlength="30" th:field="*{publisherName}" type="text"/>
                             </div>
                         </div>
                     </div>
@@ -53,7 +54,7 @@
                                 <span>Açıklama:</span>
                             </div>
                             <div>
-                                <textarea th:field="*{description}" id="textarea" rows="5" type="text" style=""></textarea>
+                                <textarea maxlength="500" th:field="*{description}" id="textarea" rows="5" type="text" style=""></textarea>
                             </div>
                         </div>
                     </div>
@@ -61,6 +62,12 @@
                     <div class = "row justify-content-center">
                         <div class = "col-md-auto px-0">
                             <button type="submit" class="btn mt-3 form-control" style="width: 250px; background-color: #ff0000;color : white;">Onayla</button>
+                        </div>
+                    </div>
+                    <div class = "row justify-content-center text-center mt-4">
+                        <div class = "col-md-7 px-0">
+                            <p id="messages" style="color : red">
+                            </p>
                         </div>
                     </div>
                 </div>

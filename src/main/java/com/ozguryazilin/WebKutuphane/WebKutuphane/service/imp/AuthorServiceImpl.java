@@ -5,6 +5,8 @@ import com.ozguryazilin.WebKutuphane.WebKutuphane.model.Book;
 import com.ozguryazilin.WebKutuphane.WebKutuphane.repository.AuthorRepository;
 import com.ozguryazilin.WebKutuphane.WebKutuphane.repository.BookRepository;
 import com.ozguryazilin.WebKutuphane.WebKutuphane.service.AuthorService;
+import com.ozguryazilin.WebKutuphane.WebKutuphane.util.ImageHelper;
+import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -41,7 +43,11 @@ public class AuthorServiceImpl implements AuthorService {
 
     @Override
     public Author getAuthor(String id){
-        return authorRepository.getOne(id);
+        Author author = authorRepository.getOne(id);
+        for(Book book : author.getBooks()){
+            book = ImageHelper.convertToBase64(book);
+        }
+        return author;
     }
 
     @Override

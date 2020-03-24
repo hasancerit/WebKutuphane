@@ -16,7 +16,6 @@ public class User {
     @Column(unique = true)
     private String username;
 
-    @Column(unique = true)
     private String email;
 
     @ManyToMany(fetch = FetchType.EAGER)

@@ -7,10 +7,9 @@
     <title>Hello</title>
 
     <!-- Web Jars -->
-    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.4.1/css/bootstrap.min.css}"/>
-    <script src="/webjars/jquery/4.4.1/jquery.min.js"></script>
-    <script th:src="@{/webjars/bootstrap/4.4.1/js/bootstrap.min.js}"></script>
     <script th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.4.1/css/bootstrap.min.css}"/>
+    <script th:src="@{/webjars/bootstrap/4.4.1/js/bootstrap.min.js}"></script>
 
     <link rel="stylesheet" type="text/css" th:href="@{/css/sidemenu.css}">
 
@@ -18,7 +17,8 @@
 
     <style>
         {
-            color: red  ;
+            color: red
+        ;
         }
 
         /* visited link */
@@ -31,9 +31,15 @@
             font-weight: 300;
         }
 
-        button{
+        button {
             border: none;
             background-color: transparent;
+        }
+
+        input{
+            opacity: 0;
+            position: absolute;
+            z-index: -1;
         }
     </style>
 </head>
@@ -46,13 +52,15 @@
 <div th:replace="fragments/sidebar :: sidebar">
 </div>
 
-<div class="container text-center">
+<div id="bookdetail" class="container text-center">
     <div class="row">
         <div class="col-lg-10 offset-1">
             <div class="mt-3 row">
                 <div sec:authorize="hasAuthority('ADMIN')" class="col-md-2 text-left align-self-center">
-                    <a th:href="@{/book/delete/{id}(id=${book.id})}"><img th:src="@{/img/delete.png}" width="30px" height="30px"/></a>
-                    <a th:href="@{/book/update/{id}(id=${book.id})}"><img th:src="@{/img/edit.png}" width="30px" height="30px"/></a>
+                    <a th:href="@{/book/delete/{id}(id=${book.id})}"><img th:src="@{/img/delete.png}" width="30px"
+                                                                          height="30px"/></a>
+                    <a th:href="@{/book/update/{id}(id=${book.id})}"><img th:src="@{/img/edit.png}" width="30px"
+                                                                          height="30px"/></a>
                 </div>
 
                 <div sec:authorize="!hasAuthority('ADMIN')" class="col-md-2 text-left align-self-center">
@@ -71,17 +79,28 @@
                 </div>
                 <div class="col-4 text-right">
                     <p class="my-0">
-                        <a th:href="${book.publisher} != null ? @{/publisher/{id}(id = ${book.publisher.id})} : @{/publisheryok}"
+                        <a th:href="${book.publisher} != null ? @{/publisher/{id}(id = ${book.publisher.id})} : ''"
                            th:text="${book.publisher} != null ? ${book.publisher.publisherName} : '-'">Author</a>
                     </p>
                 </div>
             </div>
             <hr>
             <p class="my-n2">
-                <a th:href="${book.author} != null ? @{/author/{id}(id = ${book.author.id})} : @{/yazaryok}" th:text="${book.author} != null ? ${book.author.authorFullname} : '-'">Author</a>
+                <a th:href="${book.author} != null ? @{/author/{id}(id = ${book.author.id})} : ''"
+                   th:text="${book.author} != null ? ${book.author.authorFullname} : '-'">Author</a>
             </p>
             <hr>
-            <img class="img-fluid rounded" src="http://placehold.it/900x300" alt="">
+            <div class="w-100">
+                <form th:action="@{/book/updateimage/{id}(id = ${book.id})}" enctype="multipart/form-data"
+                      method="post" class="text-left" style="width: 400px; margin: 0 auto">
+                    <label for="file">
+                        <img th:src="@{/img/changeimage.png}" style="width: 25px;height: 25px">
+                    </label>
+                    <input id="file" type="file" accept="image/jpeg" name="file" onchange="this.form.submit()"/>
+                </form>
+                <img class="img-fluid rounded" th:src="*{'data:image/jpg;base64,'+ book.bookImage64}" alt=""
+                     style="width: 400px; height: 600px;"/>
+            </div>
             <span th:text="'ISBN No:'+${book.isbnNo}" class="text-muted"></span>
             <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
             <span th:text="'Seri Adı:'+${book.serialName}" class="text-muted"></span>

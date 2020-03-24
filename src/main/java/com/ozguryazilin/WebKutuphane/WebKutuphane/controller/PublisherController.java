@@ -54,26 +54,26 @@ public class PublisherController {
     }
 
     @GetMapping("/delete/{id}")
-    public String deleteBook(@PathVariable String id){
+    public String deletePublisher(@PathVariable String id){
         publisherService.deletePublisher(id);
         return "redirect:/publisher";
     }
 
     @GetMapping("/update/{id}")
-    public String updateBook(@PathVariable String id,Model model){
+    public String updatePublisher(@PathVariable String id,Model model){
         model.addAttribute("publisher",publisherService.getPublisher(id));
         model.addAttribute("action","update");
         return "publisher/addform";
     }
 
     @PostMapping("/update")
-    public String updateBook(@ModelAttribute Publisher publisher){
+    public String updatePublisher(@ModelAttribute Publisher publisher){
         publisherService.addPublisher(publisher);
         return "redirect:/publisher";
     }
 
     @GetMapping("/{id}/addbook")
-    public String addBookToAuthor(Model model,@PathVariable String id){
+    public String addBookToPublisher(Model model,@PathVariable String id){
         Book book = new Book();
         book.setPublisher(publisherService.getPublisher(id));
         model.addAttribute("book",book);

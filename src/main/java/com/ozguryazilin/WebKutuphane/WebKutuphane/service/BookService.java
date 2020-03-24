@@ -15,5 +15,5 @@ public interface BookService {
 
     void deleteBook(String id);
 
-    List<Book> allBooksToPage();
+    void updateImage(String id,byte[] image);
 }

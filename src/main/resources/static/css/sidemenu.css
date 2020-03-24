@@ -9,13 +9,13 @@
 }
 
 .menu-a:hover {
-    color: black;
+    background-color: #283E4A;
 }
 
 .hamburger-line{
     width: 25px;
     height: 5px;
-    background-color: black;
+    background-color: #283E4A;
     margin-top: 5px;
 }
 
@@ -71,4 +71,8 @@
 
 .container{
     z-index: 90;
+}
+
+.bookright{
+    margin-left: 200px;
 }

@@ -57,7 +57,7 @@
 <div th:replace="fragments/sidebar :: sidebar">
 </div>
 
-<div id="authordetail" class="container mt-5 text-center">
+<div id="publisherdetail" class="container mt-5 text-center">
     <div class="row">
         <div sec:authorize="hasAuthority('ADMIN')" class="col-md-2 text-left align-self-center">
             <a th:href="@{/publisher/delete/{id}(id=${publisher.id})}"><img th:src="@{/img/delete.png}" width="30px" height="30px"/></a>

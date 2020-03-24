@@ -6,11 +6,9 @@
     <title>Hello</title>
 
     <!-- Web Jars -->
-    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.4.1/css/bootstrap.min.css}"/>
-    <script src="/webjars/jquery/4.4.1/jquery.min.js"></script>
-    <script th:src="@{/webjars/bootstrap/4.4.1/js/bootstrap.min.js}"></script>
     <script th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
-
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.4.1/css/bootstrap.min.css}"/>
+    <script th:src="@{/webjars/bootstrap/4.4.1/js/bootstrap.min.js}"></script>
     <link rel="stylesheet" type="text/css" th:href="@{/css/grid.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/sidemenu.css}">
 
@@ -33,17 +31,18 @@
                 <option value="1">Yayın Evi Adı</option>
                 <option value="2">Kitap</option>
             </select>
-            <button class="btn btn-sm btn-dark my-2 my-sm-0" type="submit">Search</button>
+            <button class="btn btn-sm btn-dark my-2 my-sm-0" type="submit">Ara</button>
         </div>
     </form>
 </div>
 
 <div id="publishers" class="grid-container container mt-4">
     <div th:each="publisher : ${publishers}" class="grid-item">
-        <div class="card">
-            <div class="card-body">
+        <div class="card" style="height: 350px !important; max-height: 350px!important;">
+            <div class="card-body" style="height: 350px !important; max-height: 350px!important;">
                 <h5 class="card-title" th:text="${publisher.publisherName}">Hasan CERİT</h5>
-                <p class="card-text" th:text="${publisher.description}">With supporting text below as a natural lead-in to additional content.</p>
+                <p class="card-text" th:text="${(#strings.length(publisher.description) > 330)} ?
+                                        ${#strings.substring(publisher.description,0,330)} + '...' : ${publisher.description}"></p>
                 <a th:href="@{/publisher/{id}(id=${publisher.id})}">Detay</a>
             </div>
         </div>

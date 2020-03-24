@@ -6,9 +6,11 @@ import com.ozguryazilin.WebKutuphane.WebKutuphane.service.AuthenticationService;
 import com.ozguryazilin.WebKutuphane.WebKutuphane.service.BookService;
 import com.ozguryazilin.WebKutuphane.WebKutuphane.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
 import java.security.Principal;
 
 @Controller
@@ -57,12 +59,17 @@ public class AuthenticationController {
     @PostMapping("/signup")
     public String handleSignupUser(@ModelAttribute User user) {
         authenticationService.handleSignupUser(user);
-        return "login/login";
+        return "redirect:/login";
     }
 
     @PostMapping("/admin/signup")
     public String handleSignupAdmin(@ModelAttribute User user) {
         authenticationService.handleSignupAdmin(user);
-        return "login/login";
+        return "redirect:/login";
+    }
+
+    @ExceptionHandler({DataIntegrityViolationException.class})
+    public String sameUsername(Exception e){
+        return "redirect:/signup?error";
     }
 }

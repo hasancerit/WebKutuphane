@@ -12,6 +12,8 @@ public class Author {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
     private String authorFullname;
+
+    @Column(length = 500)
     private String description;
 
     @OneToMany(mappedBy = "author",fetch = FetchType.LAZY)

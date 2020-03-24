@@ -7,6 +7,8 @@ import com.ozguryazilin.WebKutuphane.WebKutuphane.repository.AuthorRepository;
 import com.ozguryazilin.WebKutuphane.WebKutuphane.repository.BookRepository;
 import com.ozguryazilin.WebKutuphane.WebKutuphane.repository.PublisherRepository;
 import com.ozguryazilin.WebKutuphane.WebKutuphane.service.BookService;
+import com.ozguryazilin.WebKutuphane.WebKutuphane.util.ImageHelper;
+import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,10 +30,6 @@ public class BookServiceImp implements BookService {
 
     @Override
     public void addBook(Book book) {
-        /*
-        * Kitap adı boş işe hata fırlatılacak
-        * */
-
         //Girilen bir publisher var ise
         if(!(book.getPublisher().getPublisherName().equalsIgnoreCase(""))){
             List<Publisher> publishers = publisherRepository.findByPublisherName(book.getPublisher().getPublisherName());
@@ -58,7 +56,6 @@ public class BookServiceImp implements BookService {
             if(authors.size() == 0){
                 author = book.getAuthor();
                 author.setDescription("");
-
                 author = authorRepository.save(author);
             }else{
                 author = authors.get(0);
@@ -74,26 +71,10 @@ public class BookServiceImp implements BookService {
 
     @Override
     public List<Book> allBooks() {
-        return bookRepository.findAll();
-    }
-
-    /*Eger veritabanındaki herhangi bir kitaba yazar veya yayin evi girilmedi ise
-    * yazar veya yayın evin olustararak adini "-" yap. Aksi takdirde thymeleaf null hatası fırlatır.
-    * */
-    @Override
-    public List<Book> allBooksToPage() {
         List<Book> books = bookRepository.findAll();
-        for(Book b : books){
-            if(b.getAuthor() == null) {
-                Author author = new Author();
-                author.setAuthorFullname("-");
-                b.setAuthor(author);
-            }
-            if(b.getPublisher() == null){
-                Publisher publisher = new Publisher();
-                publisher.setPublisherName("-");
-                b.setPublisher(publisher);
-            }
+        for(Book book : books){
+            book = ImageHelper.convertToBase64(book);
+
         }
         return books;
     }
@@ -121,16 +102,28 @@ public class BookServiceImp implements BookService {
                 books = bookRepository.findByIsbnNo(search);
                 break;
         }
+        for(Book book : books){
+            book = ImageHelper.convertToBase64(book);
+        }
         return books;
     }
 
     @Override
     public Book getBook(String id){
-        return bookRepository.getOne(id);
+        Book book = bookRepository.getOne(id);
+        book = ImageHelper.convertToBase64(book);
+        return book;
     }
 
     @Override
     public void deleteBook(String id){
         bookRepository.delete(bookRepository.getOne(id));
+    }
+
+    @Override
+    public void updateImage(String id,byte[] image){
+        Book book = bookRepository.getOne(id);
+        book.setBookImage(image);
+        bookRepository.save(book);
     }
 }

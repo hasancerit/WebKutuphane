@@ -5,9 +5,13 @@ import com.ozguryazilin.WebKutuphane.WebKutuphane.model.Searching;
 import com.ozguryazilin.WebKutuphane.WebKutuphane.service.BookService;
 import com.ozguryazilin.WebKutuphane.WebKutuphane.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -28,7 +32,7 @@ public class BookController {
     }
 
     @PostMapping("/add")
-    public String handleAddBook(@ModelAttribute Book book){
+    public String handleAddBook(@ModelAttribute Book book,Model model){
         bookService.addBook(book);
         return "redirect:/mainpage";
     }
@@ -59,8 +63,32 @@ public class BookController {
         return "book/addform";
     }
 
-    @PostMapping("/update")
-    public String updateBook(@ModelAttribute Book book){
+    @PostMapping("/updateimage/{id}")
+    public String updateBook(@RequestParam(value = "file") MultipartFile image,@PathVariable String id){
+        try {
+            bookService.updateImage(id,image.getBytes());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "redirect:/book/"+id;
+    }
+
+    @ExceptionHandler({DataIntegrityViolationException.class})
+    public String sameUsername(Exception e, HttpServletRequest request){
+        if(request.getServletPath().equalsIgnoreCase("/book/update")) {
+            return "redirect:" + request.getRequestURI()+"/"+request.getParameter("id")+"?error";
+        }
+        return "redirect:"+request.getRequestURI()+"?error";
+    }
+
+    /**Ajax Handler**/
+    @PostMapping("/addimage")
+    public String addimage(@ModelAttribute Book book,@RequestParam(value = "file") MultipartFile image){
+        try {
+            book.setBookImage(image.getBytes());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         bookService.addBook(book);
         return "redirect:/mainpage";
     }

@@ -5,6 +5,8 @@ import com.ozguryazilin.WebKutuphane.WebKutuphane.model.Publisher;
 import com.ozguryazilin.WebKutuphane.WebKutuphane.repository.BookRepository;
 import com.ozguryazilin.WebKutuphane.WebKutuphane.repository.PublisherRepository;
 import com.ozguryazilin.WebKutuphane.WebKutuphane.service.PublisherService;
+import com.ozguryazilin.WebKutuphane.WebKutuphane.util.ImageHelper;
+import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
@@ -27,7 +29,11 @@ public class PublisherServiceImpl implements PublisherService {
 
     @Override
     public Publisher getPublisher(String id){
-        return publisherRepository.getOne(id);
+        Publisher publisher = publisherRepository.getOne(id);
+        for(Book book : publisher.getBooks()){
+            book = ImageHelper.convertToBase64(book);
+        }
+        return publisher;
     }
 
     @Override

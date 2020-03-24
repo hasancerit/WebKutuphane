@@ -10,12 +10,19 @@ public class Book {
     private String id;
     private String bookName;
     private String bookSubName;
+
+    @Column(length = 400)
     private String description;
     private String serialName;
+
+    @Column(unique = true)
     private String isbnNo;
 
     @Lob
     private byte[] bookImage;
+
+    @Transient
+    private String bookImage64;
 
     @ManyToOne(fetch = FetchType.LAZY,cascade = {})
     @JoinColumn
@@ -89,7 +96,13 @@ public class Book {
         this.publisher = publisher;
     }
 
+    public String getBookImage64() {
+        return bookImage64;
+    }
 
+    public void setBookImage64(String bookImage64) {
+        this.bookImage64 = bookImage64;
+    }
 
     public byte[] getBookImage() {
         return bookImage;

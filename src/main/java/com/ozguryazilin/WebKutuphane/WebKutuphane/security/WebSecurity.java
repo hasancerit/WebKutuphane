@@ -16,7 +16,6 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-
     @Autowired
     private LoginSuccessHandler loginSuccessHandler;
 
@@ -31,14 +30,13 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/").permitAll()
                 .antMatchers("/h2-console/**").permitAll()
-                .antMatchers("/resources/**", "/static/**","/css/**", "/img/**","/webjars/**").permitAll()
-                .antMatchers("/signup","/admin/signup","/successlogout").permitAll()
-                .antMatchers("/test").hasAnyAuthority("ADMIN")
+                .antMatchers("/resources/**", "/static/**","/css/**", "/js/**","/img/**","/webjars/**").permitAll()
+                .antMatchers("/login/**").permitAll()
+                .antMatchers("/signup","/admin/signup").permitAll()
                 .antMatchers("/book/delete/**","/author/delete/**","publisher/delete/**").hasAnyAuthority("ADMIN")
                 .antMatchers("/book/update/**","/author/update/**","publisher/update/**").hasAnyAuthority("ADMIN")
                 .anyRequest().authenticated()
                 .and()
-
                 .formLogin()
                 .loginPage("/login")
                 .successHandler(loginSuccessHandler)

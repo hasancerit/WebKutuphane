@@ -1,13 +1,15 @@
 <th:block th:fragment="item(books,mr)">
     <th:block th:each="book : ${books}">
         <div class="items">
-            <div class="card" style="width: 100px;height: 150px;" th:classappend="${mr} ? ml-2 : none">
-                <img src="https://placeimg.com/90/100/any" width="90px" height="100px">
+            <div class="card" style="width: 100px;height: 150px;" th:classappend="${mr} ? ml-3 : ml-3">
+                <a  th:href="@{/book/{id}(id=${book.id})}">
+                <img th:src="*{'data:image/jpg;base64,'+ book.bookImage64}" width="90px" height="100px">
                 <hr>
                 <div class="card-body">
-                    <h6 th:text="${book.bookName}"></h6>
+                    <h6 style="font-size: 12px" th:text="${book.bookName}"></h6>
                 </div>
             </div>
+            </a>
         </div>
     </th:block>
 </th:block>
