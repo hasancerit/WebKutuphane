@@ -31,6 +31,7 @@ Uygulama, proje dizini içinde **mvn spring-boot:run** komutu ile çalışır<br
 &nbsp;&nbsp;&nbsp;&nbsp;**Kullanıcı Adı:** h2<br>
 &nbsp;&nbsp;&nbsp;&nbsp;**Şifre:** 123<br>
 &nbsp;&nbsp;&nbsp;&nbsp;**JDBC URL:** jdbc:h2:mem:testdb<br>
+<br>
 ---
 * Spring Boot
 * Spring Security
