@@ -49,7 +49,7 @@
                             <div class="row mb-3">
                                 <div class="col-md-5 px-0 offset-md-1 text-right">
                                     <span>ISBN No*:</span>
-                                    <input type="number" onKeyDown="if(this.value.length==13) return false;" th:field="*{isbnNo}" />
+                                    <input type="number" onkeypress="if(this.value.length==13) return false;" th:field="*{isbnNo}" />
                                 </div>
                                 <div class="col-md-5 px-0 text-right">
                                     <span>Seri Adı*:</span>

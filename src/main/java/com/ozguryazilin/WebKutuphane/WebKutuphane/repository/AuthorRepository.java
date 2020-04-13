@@ -8,6 +8,6 @@ import java.util.List;
 
 @Repository
 public interface AuthorRepository extends JpaRepository<Author,String> {
-    List<Author> findByAuthorFullname(String name);
+    List<Author> findByAuthorFullnameIsContainingIgnoreCase(String name);
 
 }

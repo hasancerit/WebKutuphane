@@ -30,10 +30,10 @@ public class AuthorServiceImpl implements AuthorService {
         List<Author> authors = new ArrayList<>();
         switch (action){
             case "1":
-                authors = authorRepository.findByAuthorFullname(search);
+                authors = authorRepository.findByAuthorFullnameIsContainingIgnoreCase(search);
                 break;
             case "2":
-                List<Book> books = bookRepository.findByBookName(search);
+                List<Book> books = bookRepository.findByBookNameIsContainingIgnoreCase(search);
                 for(Book book : books)
                     authors.add(book.getAuthor());
                 break;

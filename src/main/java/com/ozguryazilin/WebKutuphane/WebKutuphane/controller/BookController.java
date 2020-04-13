@@ -73,14 +73,6 @@ public class BookController {
         return "redirect:/book/"+id;
     }
 
-    @ExceptionHandler({DataIntegrityViolationException.class})
-    public String sameUsername(Exception e, HttpServletRequest request){
-        if(request.getServletPath().equalsIgnoreCase("/book/update")) {
-            return "redirect:" + request.getRequestURI()+"/"+request.getParameter("id")+"?error";
-        }
-        return "redirect:"+request.getRequestURI()+"?error";
-    }
-
     /**Ajax Handler**/
     @PostMapping("/addimage")
     public String addimage(@ModelAttribute Book book,@RequestParam(value = "file") MultipartFile image){
@@ -91,5 +83,16 @@ public class BookController {
         }
         bookService.addBook(book);
         return "redirect:/mainpage";
+    }
+
+    @ExceptionHandler({DataIntegrityViolationException.class})
+    public String sameUsername(Exception e, HttpServletRequest request){
+        if(request.getServletPath().equalsIgnoreCase("/book/update")) {
+            return "redirect:" + request.getRequestURI()+"/"+request.getParameter("id")+"?error";
+        }else if(request.getServletPath().equalsIgnoreCase("/book/addimage")){
+            System.out.println("add");
+            return "redirect:/book/add?error";
+        }
+        return "redirect:"+request.getRequestURI()+"?error";
     }
 }

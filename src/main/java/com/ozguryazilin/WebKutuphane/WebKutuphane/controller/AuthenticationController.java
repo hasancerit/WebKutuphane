@@ -39,8 +39,10 @@ public class AuthenticationController {
         model.addAttribute("user",user);
         return "main/mainpage";
     }
-
-
+    @GetMapping("/")
+    public String mainpage(){
+        return "redirect:/mainpage";
+    }
 
     @GetMapping("/signup")
     public String signup(Model model) {

@@ -41,10 +41,10 @@ public class PublisherServiceImpl implements PublisherService {
         List<Publisher> publishers = new ArrayList<>();
         switch (action){
             case "1":
-                publishers = publisherRepository.findByPublisherName(search);
+                publishers = publisherRepository.findByPublisherNameIsContainingIgnoreCase(search);
                 break;
             case "2":
-                List<Book> books = bookRepository.findByBookName(search);
+                List<Book> books = bookRepository.findByBookNameIsContainingIgnoreCase(search);
                 for(Book book : books)
                     publishers.add(book.getPublisher());
                 break;

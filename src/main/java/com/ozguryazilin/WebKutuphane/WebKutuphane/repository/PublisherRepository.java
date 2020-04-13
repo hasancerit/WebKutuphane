@@ -8,5 +8,5 @@ import java.util.List;
 
 @Repository
 public interface PublisherRepository extends JpaRepository<Publisher,String> {
-    List<Publisher> findByPublisherName(String publisherName);
+    List<Publisher> findByPublisherNameIsContainingIgnoreCase(String publisherName);
 }

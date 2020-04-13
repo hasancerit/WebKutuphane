@@ -32,7 +32,7 @@ public class BookServiceImp implements BookService {
     public void addBook(Book book) {
         //Girilen bir publisher var ise
         if(!(book.getPublisher().getPublisherName().equalsIgnoreCase(""))){
-            List<Publisher> publishers = publisherRepository.findByPublisherName(book.getPublisher().getPublisherName());
+            List<Publisher> publishers = publisherRepository.findByPublisherNameIsContainingIgnoreCase(book.getPublisher().getPublisherName());
             Publisher publisher;
             //Fakat veri tabanında yok ise
             if(publishers.size() == 0){
@@ -51,7 +51,7 @@ public class BookServiceImp implements BookService {
 
 
         if(!book.getAuthor().getAuthorFullname().equalsIgnoreCase("")){
-            List<Author> authors = authorRepository.findByAuthorFullname(book.getAuthor().getAuthorFullname());
+            List<Author> authors = authorRepository.findByAuthorFullnameIsContainingIgnoreCase(book.getAuthor().getAuthorFullname());
             Author author;
             if(authors.size() == 0){
                 author = book.getAuthor();
@@ -84,10 +84,10 @@ public class BookServiceImp implements BookService {
         List<Book> books = new ArrayList<>();
         switch (action){
             case "1":
-                books = bookRepository.findByBookName(search);
+                books = bookRepository.findByBookNameIsContainingIgnoreCase(search);
                 break;
             case "2":
-                List<Author> authors = authorRepository.findByAuthorFullname(search);
+                List<Author> authors = authorRepository.findByAuthorFullnameIsContainingIgnoreCase(search);
                 for(Author author : authors){
                     Set<Book> authorsBooks = author.getBooks();
                     for(Book book : authorsBooks){
@@ -96,10 +96,10 @@ public class BookServiceImp implements BookService {
                 }
                 break;
             case "3":
-                books = bookRepository.findBySerialName(search);
+                books = bookRepository.findBySerialNameIsContainingIgnoreCase(search);
                 break;
             case "4":
-                books = bookRepository.findByIsbnNo(search);
+                books = bookRepository.findByIsbnNoIsContainingIgnoreCase(search);
                 break;
         }
         for(Book book : books){
