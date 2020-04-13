@@ -1,7 +1,6 @@
 ## Özgür Yazılım Kütüphane Projesi
-####Web Kütüphane
 
-**Uygulamanın Çalıştırılması:** Yazılacak  
+Uygulama, proje dizini içinde **mvn spring-boot:run** komutu ile çalışır<br>
 (Uygulama 8080 portunda çalışır)
 <br>
 <br>
@@ -17,12 +16,6 @@
 <br>
 <br>
 
-**H2**<br>
-&nbsp;&nbsp;&nbsp;&nbsp;**Kullanıcı Adı:** h2<br>
-&nbsp;&nbsp;&nbsp;&nbsp;**Şifre:** 123<br>
-&nbsp;&nbsp;&nbsp;&nbsp;**JDBC URL:** jdbc:h2:mem:testdb<br>
-<br>
-<br>
 
 **Default Kullanıcılar**<br>
 
@@ -30,6 +23,15 @@
 | :---         |     :---:      |          ---: |
 | ADMIN   | admin     | 12345    |
 | USER     | user       | 12345      |
+
+
+<br>
+
+**H2**<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**Kullanıcı Adı:** h2<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**Şifre:** 123<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**JDBC URL:** jdbc:h2:mem:testdb<br>
+
 
     
 
